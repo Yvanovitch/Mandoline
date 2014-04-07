@@ -44,31 +44,54 @@ public class App extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        Pause = new javax.swing.JButton();
+        jSlider1 = new javax.swing.JSlider();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
+        Pause.setText("Pause");
+        Pause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PauseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
-                .addGap(294, 294, 294))
+                .addGap(186, 186, 186)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Pause)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(706, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                .addGap(130, 130, 130))
+                .addGap(139, 139, 139)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Pause)
+                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(248, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void PauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PauseActionPerformed
+        // TODO add your handling code here:
+        mediaPlayerComponent.getMediaPlayer().pause();
+    }//GEN-LAST:event_PauseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,13 +142,18 @@ public class App extends javax.swing.JFrame {
 
     private EmbeddedMediaPlayerComponent mediaPlayerComponent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Pause;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSlider jSlider1;
     // End of variables declaration//GEN-END:variables
 
     private void startVideo() {
         jPanel1.add(mediaPlayerComponent,BorderLayout.CENTER);
+        //jInternalFrame1.add(mediaPlayerComponent,BorderLayout.CENTER);
         System.out.println("Start video");
         mediaPlayerComponent.getMediaPlayer().playMedia("test.avi");
         mediaPlayerComponent.getMediaPlayer().start();
+        jSlider1.setValue(75);
+        
     }
 }

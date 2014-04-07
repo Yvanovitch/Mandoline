@@ -27,18 +27,30 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
-              <Component id="jPanel1" pref="410" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="294" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="186" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jPanel1" min="-2" pref="384" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="Pause" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jSlider1" min="-2" pref="308" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="706" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-              <Component id="jPanel1" pref="212" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" pref="213" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="Pause" min="-2" max="-2" attributes="0"/>
+                  <Component id="jSlider1" min="-2" pref="48" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="248" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -48,5 +60,15 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
     </Container>
+    <Component class="javax.swing.JButton" name="Pause">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pause"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PauseActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JSlider" name="jSlider1">
+    </Component>
   </SubComponents>
 </Form>
