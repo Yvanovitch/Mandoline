@@ -43,14 +43,13 @@ public class App extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         Pause = new javax.swing.JButton();
         jSlider1 = new javax.swing.JSlider();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        setPreferredSize(new java.awt.Dimension(800, 600));
 
         Pause.setText("Pause");
         Pause.addActionListener(new java.awt.event.ActionListener() {
@@ -58,32 +57,21 @@ public class App extends javax.swing.JFrame {
                 PauseActionPerformed(evt);
             }
         });
+        getContentPane().add(Pause, java.awt.BorderLayout.PAGE_START);
+        getContentPane().add(jSlider1, java.awt.BorderLayout.PAGE_END);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(186, 186, 186)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Pause)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(706, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(139, 139, 139)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Pause)
-                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(248, Short.MAX_VALUE))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 311, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.LINE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -126,6 +114,7 @@ public class App extends javax.swing.JFrame {
                 App app = new App();
                 app.setVisible(true);
                 app.startVideo();
+                //Thread position = new Thread(new Position(jSlider1));
                 
             }
         });
@@ -143,17 +132,21 @@ public class App extends javax.swing.JFrame {
     private EmbeddedMediaPlayerComponent mediaPlayerComponent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Pause;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JSlider jSlider1;
     // End of variables declaration//GEN-END:variables
 
+    
     private void startVideo() {
-        jPanel1.add(mediaPlayerComponent,BorderLayout.CENTER);
+        add(mediaPlayerComponent,BorderLayout.CENTER);
         //jInternalFrame1.add(mediaPlayerComponent,BorderLayout.CENTER);
         System.out.println("Start video");
         mediaPlayerComponent.getMediaPlayer().playMedia("test.avi");
         mediaPlayerComponent.getMediaPlayer().start();
-        jSlider1.setValue(75);
+        
+        //jSlider1.setValue(75);
         
     }
+    
+    
 }
