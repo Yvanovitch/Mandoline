@@ -42,7 +42,7 @@ public class Main {
         EmbeddedMediaPlayerComponent mediaPlayer = new EmbeddedMediaPlayerComponent();
                 
         /* Create and display the form */
-        MainModel mainModel = new MainModel();
+        MainModel mainModel = new MainModel(mediaPlayer);
         MainController mainController = new MainController(mainModel, mediaPlayer);
         mediaPlayer.getMediaPlayer().addMediaPlayerEventListener(mainModel.getVlcListener());
         

@@ -14,11 +14,13 @@ public class MainModel extends Observable {
     private float position;
     private EventListenerList listeners;
     private VlcListener vlcListener;
+    private EmbeddedMediaPlayerComponent player;
 
-    public MainModel() {
+    public MainModel(EmbeddedMediaPlayerComponent player) {
         volume = 100;
         vlcListener = new VlcListener(this);
         listeners = new EventListenerList();
+        this.player = player;
     }
     
     public VlcListener getVlcListener () {
