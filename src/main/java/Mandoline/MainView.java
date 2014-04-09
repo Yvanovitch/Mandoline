@@ -10,8 +10,14 @@ import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 import com.sun.org.apache.xerces.internal.util.DOMUtil;
 import java.awt.BorderLayout;
+import java.io.File;
 import uk.co.caprica.vlcj.binding.LibVlc;
+import uk.co.caprica.vlcj.binding.internal.libvlc_media_t;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
+import uk.co.caprica.vlcj.medialist.MediaList;
+import uk.co.caprica.vlcj.player.MediaMeta;
+import uk.co.caprica.vlcj.player.MediaPlayer;
+import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
 /**
@@ -43,6 +49,9 @@ public class MainView extends AbstractView implements ViewListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        explorer = new javax.swing.JFileChooser();
+        errorFrame = new javax.swing.JFrame();
+        fileErrorPane = new javax.swing.JOptionPane();
         jPlayList = new javax.swing.JPanel();
         next = new javax.swing.JButton();
         previous = new javax.swing.JButton();
@@ -51,6 +60,31 @@ public class MainView extends AbstractView implements ViewListener {
         jSlider1 = new javax.swing.JSlider();
         Pause = new javax.swing.JButton();
         stop = new javax.swing.JButton();
+
+        errorFrame.setMinimumSize(new java.awt.Dimension(350, 150));
+
+        fileErrorPane.setMessage("Le fichier choisi n\'est pas supporté par VLC");
+
+        javax.swing.GroupLayout errorFrameLayout = new javax.swing.GroupLayout(errorFrame.getContentPane());
+        errorFrame.getContentPane().setLayout(errorFrameLayout);
+        errorFrameLayout.setHorizontalGroup(
+            errorFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 262, Short.MAX_VALUE)
+            .addGroup(errorFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(errorFrameLayout.createSequentialGroup()
+                    .addGap(0, 0, 0)
+                    .addComponent(fileErrorPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(0, 0, 0)))
+        );
+        errorFrameLayout.setVerticalGroup(
+            errorFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 95, Short.MAX_VALUE)
+            .addGroup(errorFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(errorFrameLayout.createSequentialGroup()
+                    .addGap(0, 0, 0)
+                    .addComponent(fileErrorPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(0, 0, 0)))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -158,7 +192,13 @@ public class MainView extends AbstractView implements ViewListener {
     }//GEN-LAST:event_previousActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-        controller.notifyAdd();
+        explorer.setCurrentDirectory(new java.io.File("D:/Films"));
+        
+        if (explorer.showOpenDialog(null) == explorer.APPROVE_OPTION) {
+                controller.notifyAdd(explorer.getSelectedFile());
+        } else {
+            System.out.println("No Selection ");
+        }
     }//GEN-LAST:event_addActionPerformed
 
 
@@ -168,6 +208,9 @@ public class MainView extends AbstractView implements ViewListener {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Pause;
     private javax.swing.JButton add;
+    private javax.swing.JFrame errorFrame;
+    private javax.swing.JFileChooser explorer;
+    private javax.swing.JOptionPane fileErrorPane;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPlayList;
     private javax.swing.JSlider jSlider1;
@@ -203,6 +246,21 @@ public class MainView extends AbstractView implements ViewListener {
     public void close() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
-    
+
+    public void badFileChoosen(File file) {
+        System.out.println("badFileChoosen");
+        errorFrame.setVisible(true);
+    }
+
+    public void mediaAdded(MediaList mediaList) {
+        Object [][] mediaTable = null;
+        MediaPlayerFactory factory = new MediaPlayerFactory();
+        MediaPlayer mediaPlayer = factory.newHeadlessMediaPlayer();
+        for (int i=0 ; i < mediaList.size() ; i++){
+            System.out.println("Media : " + mediaList.items().get(i).name() + mediaList.items().get(i).mrl());
+            mediaPlayer.playMedia(mediaList.items().get(i).mrl());
+            MediaMeta mediaMeta = mediaPlayer.getMediaMeta();
+            System.out.println("data : " + mediaMeta);
+        }
+    }
 }

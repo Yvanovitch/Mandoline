@@ -1,5 +1,6 @@
 package Mandoline;
 
+import java.io.File;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 
 
@@ -44,7 +45,7 @@ public class MainController {
         public void notifyPrevious(){
                 model.setPrevious();
         }
-        public void notifyAdd(){
-                model.openFileChooser();
+        public void notifyAdd(File file){
+                model.addFileToMediaList(file);
         }
 }

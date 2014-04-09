@@ -1,9 +1,12 @@
 package Mandoline;
 
+import java.io.File;
 import java.util.Observable;
 import javax.swing.event.EventListenerList;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
+import uk.co.caprica.vlcj.filter.MediaFileFilter;
 import uk.co.caprica.vlcj.medialist.MediaList;
+import uk.co.caprica.vlcj.medialist.MediaListItem;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 
 /**
@@ -68,7 +71,16 @@ public class MainModel extends Observable {
     public void addMedia(){
         //TODO
     }
-    public void openFileChooser(){
+    public void addFileToMediaList(File file){
+        MediaFileFilter filter = new MediaFileFilter();
+        if (filter.accept(file)){
+            mediaList.addMedia(file.getPath());
+            fireMediaAdded(mediaList);
+        }
+        else {
+            System.out.println("Fichier invalide");
+            fireBadFileChoosen(file);
+        }
         
     }
     
@@ -79,7 +91,9 @@ public class MainModel extends Observable {
     public void removeListener(ViewListener l) {
         listeners.remove(ViewListener.class, l);
     }
-
+    
+    
+    
     public void fireVolumeChanged() {
         ViewListener[] listenerList = (ViewListener[]) listeners.getListeners(ViewListener.class);
 
@@ -95,4 +109,22 @@ public class MainModel extends Observable {
             listener.positionChanged(getPosition());
         }
     }
+
+    private void fireBadFileChoosen(File file) {
+        ViewListener[] listenerList = (ViewListener[]) listeners.getListeners(ViewListener.class);
+
+        for (ViewListener listener : listenerList) {
+            listener.badFileChoosen(file);
+        }
+    }
+
+    private void fireMediaAdded(MediaList mediaList) {
+        ViewListener[] listenerList = (ViewListener[]) listeners.getListeners(ViewListener.class);
+
+        for (ViewListener listener : listenerList) {
+            listener.mediaAdded(mediaList);
+        }
+    }
+    
+    
 }
