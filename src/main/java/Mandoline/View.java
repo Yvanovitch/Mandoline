@@ -18,12 +18,12 @@ import uk.co.caprica.vlcj.runtime.RuntimeUtil;
  *
  * @author Mathieu
  */
-public class Vue extends javax.swing.JFrame {
+public class View extends javax.swing.JFrame {
 
     /**
      * Creates new form Player
      */
-    public Vue() {
+    public View() {
         
         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "C:/Program Files/VideoLAN/VLC");
         Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
@@ -45,10 +45,7 @@ public class Vue extends javax.swing.JFrame {
 
         Pause = new javax.swing.JButton();
         jSlider1 = new javax.swing.JSlider();
-        playList = new ModelPlayList();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        jPlayList = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -62,37 +59,18 @@ public class Vue extends javax.swing.JFrame {
         getContentPane().add(Pause, java.awt.BorderLayout.PAGE_START);
         getContentPane().add(jSlider1, java.awt.BorderLayout.PAGE_END);
 
-        jButton1.setText("jButton1");
-
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
-
-        javax.swing.GroupLayout playListLayout = new javax.swing.GroupLayout(playList);
-        playList.setLayout(playListLayout);
-        playListLayout.setHorizontalGroup(
-            playListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(playListLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(playListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPlayListLayout = new javax.swing.GroupLayout(jPlayList);
+        jPlayList.setLayout(jPlayListLayout);
+        jPlayListLayout.setHorizontalGroup(
+            jPlayListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
-        playListLayout.setVerticalGroup(
-            playListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(playListLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jButton1)
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+        jPlayListLayout.setVerticalGroup(
+            jPlayListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 309, Short.MAX_VALUE)
         );
 
-        getContentPane().add(playList, java.awt.BorderLayout.LINE_START);
+        getContentPane().add(jPlayList, java.awt.BorderLayout.LINE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -108,11 +86,8 @@ public class Vue extends javax.swing.JFrame {
     private EmbeddedMediaPlayerComponent mediaPlayerComponent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Pause;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JList jList1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPlayList;
     private javax.swing.JSlider jSlider1;
-    private javax.swing.JPanel playList;
     // End of variables declaration//GEN-END:variables
 
     
