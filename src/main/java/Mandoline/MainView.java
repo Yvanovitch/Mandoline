@@ -18,16 +18,16 @@ import uk.co.caprica.vlcj.runtime.RuntimeUtil;
  *
  * @author Mathieu
  */
-public class View extends javax.swing.JFrame {
+public class MainView extends AbstractView implements ViewListener {
 
     /**
      * Creates new form Player
      */
-    public View() {
+    public MainView(MainController mainController, EmbeddedMediaPlayerComponent player) {
+        super(mainController);
         
-        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "C:/Program Files/VideoLAN/VLC");
-        Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
-        mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
+        
+        mediaPlayerComponent = player;
 
         //mediaPlayerComponent.getMediaPlayer().start();
         System.out.println("Created");
@@ -90,7 +90,6 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JSlider jSlider1;
     // End of variables declaration//GEN-END:variables
 
-    
     public void startVideo() {
         add(mediaPlayerComponent,BorderLayout.CENTER);
         //jInternalFrame1.add(mediaPlayerComponent,BorderLayout.CENTER);
@@ -99,7 +98,25 @@ public class View extends javax.swing.JFrame {
         mediaPlayerComponent.getMediaPlayer().start();
         
         //jSlider1.setValue(75);
-        
+    }
+
+    public void volumeChanged(VolumeChangedEvent event) {
+        //TODO
+    }
+    
+    public void positionChanged(float position) {
+        System.out.println("jslider1.setPos"+position);
+    }
+
+    @Override
+    public void display() {
+        this.setVisible(true);
+        this.startVideo();
+    }
+
+    @Override
+    public void close() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     

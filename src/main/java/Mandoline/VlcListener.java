@@ -6,117 +6,122 @@ import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
 
 
 public class VlcListener implements MediaPlayerEventListener {
+    MainModel mainModel;
+    
+    public VlcListener (MainModel mainModel) {
+        this.mainModel = mainModel;
+    }
 
     public void mediaChanged(MediaPlayer mediaPlayer, libvlc_media_t media, String mrl) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void opening(MediaPlayer mediaPlayer) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void buffering(MediaPlayer mediaPlayer, float newCache) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void playing(MediaPlayer mediaPlayer) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void paused(MediaPlayer mediaPlayer) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void stopped(MediaPlayer mediaPlayer) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void forward(MediaPlayer mediaPlayer) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void backward(MediaPlayer mediaPlayer) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void finished(MediaPlayer mediaPlayer) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void timeChanged(MediaPlayer mediaPlayer, long newTime) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void positionChanged(MediaPlayer mediaPlayer, float newPosition) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        mainModel.setPosition(newPosition);
     }
 
     public void seekableChanged(MediaPlayer mediaPlayer, int newSeekable) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void pausableChanged(MediaPlayer mediaPlayer, int newPausable) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void titleChanged(MediaPlayer mediaPlayer, int newTitle) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void snapshotTaken(MediaPlayer mediaPlayer, String filename) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void lengthChanged(MediaPlayer mediaPlayer, long newLength) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void videoOutput(MediaPlayer mediaPlayer, int newCount) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void error(MediaPlayer mediaPlayer) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void mediaMetaChanged(MediaPlayer mediaPlayer, int metaType) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void mediaSubItemAdded(MediaPlayer mediaPlayer, libvlc_media_t subItem) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void mediaDurationChanged(MediaPlayer mediaPlayer, long newDuration) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void mediaParsedChanged(MediaPlayer mediaPlayer, int newStatus) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void mediaFreed(MediaPlayer mediaPlayer) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void mediaStateChanged(MediaPlayer mediaPlayer, int newState) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void newMedia(MediaPlayer mediaPlayer) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void subItemPlayed(MediaPlayer mediaPlayer, int subItemIndex) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void subItemFinished(MediaPlayer mediaPlayer, int subItemIndex) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     public void endOfSubItems(MediaPlayer mediaPlayer) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
     
 }

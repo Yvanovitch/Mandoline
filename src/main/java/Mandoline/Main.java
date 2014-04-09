@@ -1,6 +1,12 @@
 
 package Mandoline;
 
+import com.sun.jna.Native;
+import com.sun.jna.NativeLibrary;
+import uk.co.caprica.vlcj.binding.LibVlc;
+import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
+import uk.co.caprica.vlcj.runtime.RuntimeUtil;
+
 public class Main {
         /**
      * @param args the command line arguments
@@ -19,27 +25,29 @@ public class Main {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
+        //Create the MediaPlayerComponent :
+        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "C:/Program Files/VideoLAN/VLC");
+        Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+        
+        EmbeddedMediaPlayerComponent mediaPlayer = new EmbeddedMediaPlayerComponent();
+                
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                View app = new View();
-                app.setVisible(true);
-                app.startVideo();
-                
-                
-            }
-        });
-    
+        MainModel mainModel = new MainModel();
+        MainController mainController = new MainController(mainModel, mediaPlayer);
+        mediaPlayer.getMediaPlayer().addMediaPlayerEventListener(mainModel.getVlcListener());
+        
+        mainController.displayViews();
+
         
 
 //        mediaPlayerComponent.getMediaPlayer().playMedia("test.avi");
