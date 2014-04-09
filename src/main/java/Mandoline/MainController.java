@@ -31,4 +31,20 @@ public class MainController {
 	public void notifyVolumeChanged(int volume){
 		model.setVolume(volume);
 	}
+        
+        public void notifyPaused(){
+                model.setPause();
+        }
+        public void notifyStopped(){
+                model.setStop();
+        }
+        public void notifyNext(){
+                model.setNext();
+        }
+        public void notifyPrevious(){
+                model.setPrevious();
+        }
+        public void notifyAdd(){
+                model.openFileChooser();
+        }
 }

@@ -1,7 +1,7 @@
 package Mandoline;
 
 public abstract class AbstractView extends javax.swing.JFrame implements ViewListener{
-	private MainController controller = null;
+	protected MainController controller = null;
  
 	public AbstractView(MainController controller){
 		super();

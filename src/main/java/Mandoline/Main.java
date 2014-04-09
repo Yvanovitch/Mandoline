@@ -47,14 +47,6 @@ public class Main {
         mediaPlayer.getMediaPlayer().addMediaPlayerEventListener(mainModel.getVlcListener());
         
         mainController.displayViews();
-
-        
-
-//        mediaPlayerComponent.getMediaPlayer().playMedia("test.avi");
-//        mediaPlayerComponent.getMediaPlayer().start();
-//        while(mediaPlayerComponent.getMediaPlayer().getTime() < 8000){}
-//        mediaPlayerComponent.getMediaPlayer().pause();
-//        mediaPlayerComponent.getMediaPlayer().setPosition((float)0.5);
         
     }
 }

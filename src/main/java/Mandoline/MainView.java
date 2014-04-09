@@ -43,12 +43,60 @@ public class MainView extends AbstractView implements ViewListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Pause = new javax.swing.JButton();
-        jSlider1 = new javax.swing.JSlider();
         jPlayList = new javax.swing.JPanel();
+        next = new javax.swing.JButton();
+        previous = new javax.swing.JButton();
+        add = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jSlider1 = new javax.swing.JSlider();
+        Pause = new javax.swing.JButton();
+        stop = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        next.setText("Suivant");
+        next.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextActionPerformed(evt);
+            }
+        });
+
+        previous.setText("Précédent");
+        previous.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previousActionPerformed(evt);
+            }
+        });
+
+        add.setText("Ajouter");
+        add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPlayListLayout = new javax.swing.GroupLayout(jPlayList);
+        jPlayList.setLayout(jPlayListLayout);
+        jPlayListLayout.setHorizontalGroup(
+            jPlayListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(previous, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+            .addComponent(next, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPlayListLayout.setVerticalGroup(
+            jPlayListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPlayListLayout.createSequentialGroup()
+                .addContainerGap(195, Short.MAX_VALUE)
+                .addComponent(add)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(next)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(previous)
+                .addGap(10, 10, 10))
+        );
+
+        getContentPane().add(jPlayList, java.awt.BorderLayout.LINE_START);
 
         Pause.setText("Pause");
         Pause.addActionListener(new java.awt.event.ActionListener() {
@@ -56,29 +104,62 @@ public class MainView extends AbstractView implements ViewListener {
                 PauseActionPerformed(evt);
             }
         });
-        getContentPane().add(Pause, java.awt.BorderLayout.PAGE_START);
-        getContentPane().add(jSlider1, java.awt.BorderLayout.PAGE_END);
 
-        javax.swing.GroupLayout jPlayListLayout = new javax.swing.GroupLayout(jPlayList);
-        jPlayList.setLayout(jPlayListLayout);
-        jPlayListLayout.setHorizontalGroup(
-            jPlayListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        stop.setText("Stop");
+        stop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stopActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Pause, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(stop, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-        jPlayListLayout.setVerticalGroup(
-            jPlayListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 309, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(stop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(Pause, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        getContentPane().add(jPlayList, java.awt.BorderLayout.LINE_START);
+        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void PauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PauseActionPerformed
-        // TODO add your handling code here:
-        mediaPlayerComponent.getMediaPlayer().pause();
+        controller.notifyPaused();
     }//GEN-LAST:event_PauseActionPerformed
+
+    private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
+        controller.notifyStopped();
+    }//GEN-LAST:event_stopActionPerformed
+
+    private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
+        controller.notifyNext();
+    }//GEN-LAST:event_nextActionPerformed
+
+    private void previousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousActionPerformed
+        controller.notifyPrevious();
+    }//GEN-LAST:event_previousActionPerformed
+
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+        controller.notifyAdd();
+    }//GEN-LAST:event_addActionPerformed
 
 
 
@@ -86,18 +167,22 @@ public class MainView extends AbstractView implements ViewListener {
     private EmbeddedMediaPlayerComponent mediaPlayerComponent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Pause;
+    private javax.swing.JButton add;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPlayList;
     private javax.swing.JSlider jSlider1;
+    private javax.swing.JButton next;
+    private javax.swing.JButton previous;
+    private javax.swing.JButton stop;
     // End of variables declaration//GEN-END:variables
 
     public void startVideo() {
         add(mediaPlayerComponent,BorderLayout.CENTER);
         //jInternalFrame1.add(mediaPlayerComponent,BorderLayout.CENTER);
         System.out.println("Start video");
-        mediaPlayerComponent.getMediaPlayer().playMedia("D:\\le.pacte.avi");
+        mediaPlayerComponent.getMediaPlayer().playMedia("test.avi");
         mediaPlayerComponent.getMediaPlayer().start();
-        
-        //jSlider1.setValue(75);
+
     }
 
     public void volumeChanged(VolumeChangedEvent event) {

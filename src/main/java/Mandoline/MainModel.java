@@ -3,6 +3,8 @@ package Mandoline;
 import java.util.Observable;
 import javax.swing.event.EventListenerList;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
+import uk.co.caprica.vlcj.medialist.MediaList;
+import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 
 /**
  *
@@ -15,12 +17,17 @@ public class MainModel extends Observable {
     private EventListenerList listeners;
     private VlcListener vlcListener;
     private EmbeddedMediaPlayerComponent player;
+    MediaPlayerFactory mediaPlayerFactory;
+    MediaList mediaList;
+    
 
     public MainModel(EmbeddedMediaPlayerComponent player) {
         volume = 100;
         vlcListener = new VlcListener(this);
         listeners = new EventListenerList();
         this.player = player;
+        mediaPlayerFactory = new MediaPlayerFactory();
+        mediaList = mediaPlayerFactory.newMediaList();
     }
     
     public VlcListener getVlcListener () {
@@ -36,6 +43,10 @@ public class MainModel extends Observable {
 
         fireVolumeChanged();
     }
+    
+    public void setPause(){
+        player.getMediaPlayer().pause();
+    }
 
     public float getPosition() {
         return this.position;
@@ -45,6 +56,22 @@ public class MainModel extends Observable {
         this.position = position;
         firePositionChanged();
     }
+    public void setStop(){
+        player.getMediaPlayer().stop();
+    }
+    public void setNext(){
+        //TODO
+    }
+    public void setPrevious(){
+        //TODO
+    }
+    public void addMedia(){
+        //TODO
+    }
+    public void openFileChooser(){
+        
+    }
+    
     public void addListener(ViewListener listener) {
         listeners.add(ViewListener.class, listener);
     }
