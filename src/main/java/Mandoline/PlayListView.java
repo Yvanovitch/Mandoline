@@ -221,19 +221,7 @@ public class PlayListView extends JPanelView {
         
     public void newMedia(EventNewFile event) {
         if(event.isSupported()) {
-            MediaPlayerFactory factory = new MediaPlayerFactory();
-            MediaPlayer mediaPlayer = factory.newHeadlessMediaPlayer();
-
-            mediaPlayer.prepareMedia(event.getFile().getAbsolutePath());
-            mediaPlayer.parseMedia();
-            MediaMeta mediaMeta = mediaPlayer.getMediaMeta();
-            //System.out.println("MediaList changed, data : " + mediaMeta);
-            Vector<Object> row = new Vector<Object>();
-            row.add(mediaMeta.getTitle());
-            row.add(event.getFile().getAbsolutePath());
-            row.add(mediaMeta.getArtist());
-            row.add(mediaMeta.getAlbum());
-            ((MyTableModel)table.getModel()).setRow(row);
+            ((MyTableModel)table.getModel()).setList(event.data);
         }
         else {
             System.out.println("badFileChoosen : " + event.file);
@@ -244,7 +232,6 @@ public class PlayListView extends JPanelView {
     
     public void clickOnListPerformed(java.awt.event.MouseEvent evt) {
         int index = table.getSelectedRow();
-        String mrl = ((MyTableModel)table.getModel()).getMrl(index);
         controller.notifyNewPlay(index);
     }
 }

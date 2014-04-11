@@ -51,11 +51,5 @@ public class Main {
         MainController mainController = new MainController(mainModel, mediaPlayer);
         mediaPlayer.getMediaPlayer().addMediaPlayerEventListener(mainModel.getVlcListener());
         
-        /*Thread.sleep(200);
-        File fileTest = new File("C:\\test.avi");
-        mainController.notifyAdd(fileTest);
-        mainController.notifyNewPlay("C:\\test.avi");
-        //mainController.displayViews();
-        //*/
     }
 }

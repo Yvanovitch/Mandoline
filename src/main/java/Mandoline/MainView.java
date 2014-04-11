@@ -64,7 +64,6 @@ public class MainView extends JFrameView implements ModelListener {
         this.pack();
 
         this.display();
-        this.startVideo();
     }
 
     /**
@@ -175,6 +174,7 @@ public class MainView extends JFrameView implements ModelListener {
 
     private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
         controller.notifyStopped();
+        jSlider1.setValue(0);
     }//GEN-LAST:event_stopActionPerformed
 
     private void OpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenActionPerformed
@@ -240,37 +240,12 @@ public class MainView extends JFrameView implements ModelListener {
     }
 
     /**
-     * set the position of the current video
-     *
-     * @param f the position where you want to position your video
-     */
-    public void setPosition(float f) {
-
-        mediaPlayer.getMediaPlayer().setPosition(f);
-
-    }
-
-    /**
      * set the position of the slider
      *
      * @param position where you want to position your slider
      */
-    public void setjSlider1(int position) {
+    public void setSliderPosition(int position) {
         jSlider1.setValue(position);
-    }
-
-    /**
-     * It's what starts the play of the video
-     */
-    public void startVideo() {
-        //jInternalFrame1.add(mediaPlayerComponent,BorderLayout.CENTER);
-        System.out.println("Start video");
-        mediaPlayer.getMediaPlayer().playMedia("test.avi");
-        mediaPlayer.getMediaPlayer().start();
-
-
-
-
     }
 
     /**
@@ -303,7 +278,6 @@ public class MainView extends JFrameView implements ModelListener {
     @Override
     public void display() {
         this.setVisible(true);
-        this.startVideo();
     }
 
     /**

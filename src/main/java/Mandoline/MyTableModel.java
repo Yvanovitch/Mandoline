@@ -98,19 +98,6 @@ public class MyTableModel extends AbstractTableModel implements Reorderable {
         controller.notifyReorder(fromIndex, toIndex);
     }
     
-    public void setRow(Vector<Object> row) {
-        data.set(lastIndex, row);
-        for(int i = 0; i < row.size(); i++) {
-            setValueAt(row.get(i), lastIndex, i);
-        }
-        
-        lastIndex++;
-    }
-    
-    public String getMrl(int index) {
-        return (String)data.get(index).get(1);
-    }
-    
     public void setList(Vector<Vector<Object>> data) {
         for(int i = 0; i < data.size(); i++) {
             for(int j = 0; j < data.get(i).size(); j++) {

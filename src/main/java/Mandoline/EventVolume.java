@@ -1,8 +1,5 @@
 
-//N'est qu'un exemple d'événement gérable
-
-//Permet d'envoyer à la Vue l'événement en sachant quel a été le model source de l'événement
-
+//Pas encore implémenté
 package Mandoline;
 
 import java.util.EventObject;

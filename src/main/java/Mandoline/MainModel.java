@@ -106,7 +106,7 @@ public class MainModel extends Observable {
             playFile(currentMedia + 1);
         }
         else {
-            System.out.println("Pas de fichier suivant");
+            System.out.println("Liste de lecture terminée.");
         }
     }
     /**

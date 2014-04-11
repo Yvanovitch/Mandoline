@@ -30,7 +30,7 @@ public class MainController {
         this.model = model;
 
         mainView = new MainView(this, player);
-        listener = new VlcListener(mainView);
+        listener = new VlcListener(mainView, model);
         player.getMediaPlayer().addMediaPlayerEventListener(listener);
         addListenersToModel();
     }

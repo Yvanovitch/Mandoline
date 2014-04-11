@@ -11,13 +11,15 @@ import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
 public class VlcListener implements MediaPlayerEventListener {
     
     MainView view;
+    MainModel model;
     
     /**
      *
      * @param view
      */
-    public VlcListener(MainView view) {
+    public VlcListener(MainView view, MainModel model) {
         this.view = view;
+        this.model = model;
     }
     
     /**
@@ -70,7 +72,7 @@ public class VlcListener implements MediaPlayerEventListener {
      * @param mediaPlayer
      */
     public void stopped(MediaPlayer mediaPlayer) {
-        //TODO
+        view.setPause("play");
     }
     
     /**
@@ -94,11 +96,7 @@ public class VlcListener implements MediaPlayerEventListener {
      * @param mediaPlayer
      */
     public void finished(MediaPlayer mediaPlayer) {
-        
-        if (view.getToggleButton1state()) {
-            view.startVideo();
-            
-        }
+        model.setNext();
     }
     
     /**
@@ -117,11 +115,8 @@ public class VlcListener implements MediaPlayerEventListener {
      */
     public void positionChanged(MediaPlayer mediaPlayer, float newPosition) {
         float position = view.getjSlider1();
-        view.setjSlider1((int) (newPosition * 100));
+        view.setSliderPosition((int) (newPosition * 100));
         view.setjlabel();
-        
-        
-        
     }
     
     /**
