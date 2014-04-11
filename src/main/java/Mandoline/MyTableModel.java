@@ -6,28 +6,14 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 
-/**
- *
- * @author STEPHAN
- */
 public class MyTableModel extends AbstractTableModel implements Reorderable {
-    private String[] columnNames = {"Name", "Length", "Artiste", "Album"};
+    private String[] columnNames = {"Name", "mrl", "Artiste", "Album"};
     private Vector<Vector<Object>> data;
+    private int lastIndex = 0;
 
-        /*Object[][] data = {
-            {"Kathy", "00", "Kathy", "Album sans titre"},
-            {"John", "Doe", "Kathy", "Album sans titre"},
-            {"Sue", "Black", "Kathy", "Album sans titre"},
-            {"Jane", "White", "Kathy", "Album sans titre"},
-            {"Joe", "Brown", "Kathy", "Album sans titre"}
-        };*/
-    
-        
-    /**
-     *
-     */
     public MyTableModel () {
         data = new Vector<Vector<Object>>();
+        lastIndex = 0;
         
         Vector<Object> row2 = new Vector<Object>(4);
         for(int i = 0; i < 50; i++) {
@@ -83,33 +69,16 @@ public class MyTableModel extends AbstractTableModel implements Reorderable {
      */
     @Override
     public void setValueAt(Object value, int row, int col) {
-        //data[row][col] = value;
-        /*Vector<Object> rowVector = new Vector<Object>(4);
-        mySetElementAt(rowVector, value, col);
-        
-        while(data.size() < row) {
-            this.addRow(new Vector<Object>());
-        }
-        this.addRow(rowVector);
-        */
         if(data.size() < row) {
             return;
         }
         
         data.get(row).set(col, value);
         
-        //System.out.println("data " + this.dataVector.size() + " row " + row);
         fireTableCellUpdated(row, col);
 
     }
     
-    /**
-     *
-     * @param vector
-     * @param index
-     * @param value
-     * @return
-     */
     public Object mySetElementAt(Vector vector, int index, Object value) {
         while(vector.size() < index + 1) {
             vector.add("");
@@ -117,12 +86,25 @@ public class MyTableModel extends AbstractTableModel implements Reorderable {
         return vector.set(index, value);
     }
 
-    /**
-     *
-     * @param fromIndex
-     * @param toIndex
-     */
     public void reorder(int fromIndex, int toIndex) {
-        data.set(fromIndex, data.set(toIndex, data.get(fromIndex)));
+        if(toIndex > 0) 
+            toIndex -= 1;
+        System.out.println(fromIndex+" -> "+toIndex);
+        Vector<Object> temp = (Vector<Object>)data.get(toIndex).clone();
+        data.set(toIndex, data.get(fromIndex));
+        data.set(fromIndex, temp);
+    }
+    
+    public void setRow(Vector<Object> row) {
+        data.set(lastIndex, row);
+        for(int i = 0; i < row.size(); i++) {
+            setValueAt(row.get(i), lastIndex, i);
+        }
+        
+        lastIndex++;
+    }
+    
+    public String getMrl(int index) {
+        return (String)data.get(index).get(1);
     }
 }

@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.io.File;
 import java.util.EventObject;
+import java.util.Vector;
 import javax.swing.DropMode;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -45,8 +46,12 @@ public class PlayListView extends JPanelView {
         table.setTransferHandler(new TableRowTransferHandler(table));
         table.setFillsViewportHeight(true);
         table.setAutoCreateRowSorter(true);
-        
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickOnListPerformed(evt);
+            }
+        });
         
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setAutoscrolls(true);
@@ -209,45 +214,37 @@ public class PlayListView extends JPanelView {
      * @param event
      */
     public void refresh(EventObject event) {
-        if(event instanceof EventMediaList) {
-            mediaListChanged((EventMediaList)event);
-        } else if(event instanceof EventBadFile) {
-            badFileChoosen((EventBadFile)event);
+        if(event instanceof EventNewFile) {
+            newMedia((EventNewFile) event);
         }
     }
-    
-    /**
-     *
-     * @param event
-     */
-    public void badFileChoosen(EventBadFile event) {
-        System.out.println("badFileChoosen : "+event.file);
-        errorFrame.setVisible(true);
-    }
-    
-    /**
-     *
-     * @param event
-     */
-    public void mediaListChanged(EventMediaList event) {
-        MediaList mediaList = event.getMediaList();
         
-        String test = "test";
-        
-        MediaPlayerFactory factory = new MediaPlayerFactory();
-        MediaPlayer mediaPlayer = factory.newHeadlessMediaPlayer();
-        for (int i=0 ; i < mediaList.size() ; i++){
-            
-            //System.out.println("Media : " + mediaList.items().get(i).name() + mediaList.items().get(i).mrl());
-            mediaPlayer.prepareMedia(mediaList.items().get(i).mrl());
+    public void newMedia(EventNewFile event) {
+        if(event.isSupported()) {
+            MediaPlayerFactory factory = new MediaPlayerFactory();
+            MediaPlayer mediaPlayer = factory.newHeadlessMediaPlayer();
+
+            mediaPlayer.prepareMedia(event.getFile().getAbsolutePath());
             mediaPlayer.parseMedia();
             MediaMeta mediaMeta = mediaPlayer.getMediaMeta();
             //System.out.println("MediaList changed, data : " + mediaMeta);
-            table.setValueAt(mediaMeta.getTitle(), i, 0);
-            /*table.setValueAt(mediaMeta.getLength(), i, 1);
-            table.setValueAt(mediaMeta.getArtist(), i, 2);
-            table.setValueAt(mediaMeta.getAlbum(), i, 3);*/
+            Vector<Object> row = new Vector<Object>();
+            row.add(mediaMeta.getTitle());
+            row.add(event.getFile().getAbsolutePath());
+            row.add(mediaMeta.getArtist());
+            row.add(mediaMeta.getAlbum());
+            ((MyTableModel)table.getModel()).setRow(row);
+        }
+        else {
+            System.out.println("badFileChoosen : " + event.file);
+            errorFrame.setVisible(true);
         }
     }
 
+    
+    public void clickOnListPerformed(java.awt.event.MouseEvent evt) {
+        int index = table.getSelectedRow();
+        String mrl = ((MyTableModel)table.getModel()).getMrl(index);
+        
+    }
 }

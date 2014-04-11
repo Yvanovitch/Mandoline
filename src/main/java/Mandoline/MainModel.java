@@ -118,14 +118,12 @@ public class MainModel extends Observable {
     public void addFileToMediaList(File file){
         MediaFileFilter filter = new MediaFileFilter();
         if (filter.accept(file)){
-            mediaList.addMedia(file.getPath());
-            fireEvent(new EventMediaList(this, mediaList));
+            fireEvent(new EventNewFile(this, file, true));
         }
         else {
             System.out.println("Fichier invalide");
-            fireEvent(new EventBadFile(this, file));
+            fireEvent(new EventNewFile(this, file, false));
         }
-        
     }
     
     /**
