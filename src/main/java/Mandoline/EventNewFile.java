@@ -6,6 +6,7 @@ package Mandoline;
 
 import java.io.File;
 import java.util.EventObject;
+import java.util.Vector;
 
 /**
  *
@@ -14,12 +15,14 @@ import java.util.EventObject;
 public class EventNewFile extends EventPlayList {
     File file;
     Boolean supported;
-    
-    public EventNewFile(Object source, File file, Boolean supported) {
+    Vector<Vector<Object>> data;
+            
+    public EventNewFile(Object source, File file, Vector<Vector<Object>> data, Boolean supported) {
         super(source);
         
         this.file = file;
         this.supported = supported;
+        this.data = data;
     }
     
     public File getFile () {

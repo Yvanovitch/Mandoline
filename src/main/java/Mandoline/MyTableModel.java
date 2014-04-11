@@ -10,10 +10,12 @@ public class MyTableModel extends AbstractTableModel implements Reorderable {
     private String[] columnNames = {"Name", "mrl", "Artiste", "Album"};
     private Vector<Vector<Object>> data;
     private int lastIndex = 0;
+    private MainController controller;
 
-    public MyTableModel () {
+    public MyTableModel (MainController controller) {
         data = new Vector<Vector<Object>>();
         lastIndex = 0;
+        this.controller = controller;
         
         Vector<Object> row2 = new Vector<Object>(4);
         for(int i = 0; i < 50; i++) {
@@ -93,6 +95,7 @@ public class MyTableModel extends AbstractTableModel implements Reorderable {
         Vector<Object> temp = (Vector<Object>)data.get(toIndex).clone();
         data.set(toIndex, data.get(fromIndex));
         data.set(fromIndex, temp);
+        controller.notifyReorder(fromIndex, toIndex);
     }
     
     public void setRow(Vector<Object> row) {
@@ -106,5 +109,13 @@ public class MyTableModel extends AbstractTableModel implements Reorderable {
     
     public String getMrl(int index) {
         return (String)data.get(index).get(1);
+    }
+    
+    public void setList(Vector<Vector<Object>> data) {
+        for(int i = 0; i < data.size(); i++) {
+            for(int j = 0; j < data.get(i).size(); j++) {
+                setValueAt(data.get(i).get(j), i, j);
+            }
+        }
     }
 }
