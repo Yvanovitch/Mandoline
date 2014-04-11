@@ -28,6 +28,7 @@ import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
 /**
  * It is the view of the application
+ *
  * @author Mathieu
  */
 public class MainView extends JFrameView implements ModelListener {
@@ -36,15 +37,16 @@ public class MainView extends JFrameView implements ModelListener {
     EmbeddedMediaPlayerComponent player;
 
     /**
-     * Creates new form Player 
-     * @param mainController 
-     * @param player 
+     * Creates new form Player
+     *
+     * @param mainController
+     * @param player
      */
     public MainView(MainController mainController, EmbeddedMediaPlayerComponent player) {
         super(mainController);
         this.player = player;
         mediaPlayer = player;
-        
+
         //player.getMediaPlayer().addMediaPlayerEventListener(new VlcListener(this));
         //mediaPlayerComponent.getMediaPlayer().start();
         System.out.println("Created");
@@ -80,9 +82,20 @@ public class MainView extends JFrameView implements ModelListener {
         stop = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
+        jToolBar1 = new javax.swing.JToolBar();
+        Open = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jSlider1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jSlider1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jSlider1MouseReleased(evt);
+            }
+        });
 
         Pause.setText("Pause");
         Pause.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +122,7 @@ public class MainView extends JFrameView implements ModelListener {
                 .addComponent(Pause)
                 .addGap(18, 18, 18)
                 .addComponent(stop, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,6 +151,21 @@ public class MainView extends JFrameView implements ModelListener {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
+        jToolBar1.setRollover(true);
+
+        Open.setText("Open");
+        Open.setFocusable(false);
+        Open.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Open.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Open.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OpenActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(Open);
+
+        getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_START);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -148,18 +176,36 @@ public class MainView extends JFrameView implements ModelListener {
     private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
         controller.notifyStopped();
     }//GEN-LAST:event_stopActionPerformed
+
+    private void OpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenActionPerformed
+    }//GEN-LAST:event_OpenActionPerformed
+
+    private void jSlider1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSlider1MousePressed
+        
+
+    }//GEN-LAST:event_jSlider1MousePressed
+
+    private void jSlider1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSlider1MouseReleased
+        float x = evt.getX();
+        float width = jSlider1.getWidth();
+        float s = evt.getX() / width;
+        mediaPlayer.getMediaPlayer().setPosition((float) evt.getX() / width);
+    }//GEN-LAST:event_jSlider1MouseReleased
     private EmbeddedMediaPlayerComponent mediaPlayer;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Open;
     private javax.swing.JButton Pause;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JButton stop;
     // End of variables declaration//GEN-END:variables
 
     /**
      * set the text of the button pause
+     *
      * @param str the text you want to write in the button
      */
     public void setPause(String str) {
@@ -168,6 +214,7 @@ public class MainView extends JFrameView implements ModelListener {
 
     /**
      * get the value of the ButtonRepeat
+     *
      * @return a boolean which indicate if the togglebutton is activated
      */
     public boolean getToggleButton1state() {
@@ -176,7 +223,7 @@ public class MainView extends JFrameView implements ModelListener {
     }
 
     /**
-     *  set the text in the label of the time
+     * set the text in the label of the time
      */
     public void setjlabel() {
         Time time = new Time(mediaPlayer.getMediaPlayer().getTime());
@@ -185,15 +232,16 @@ public class MainView extends JFrameView implements ModelListener {
 
     /**
      * get the slider value
+     *
      * @return the slider value
      */
     public int getjSlider1() {
-        System.out.println(jSlider1.getValue());
         return jSlider1.getValue();
     }
 
     /**
      * set the position of the current video
+     *
      * @param f the position where you want to position your video
      */
     public void setPosition(float f) {
@@ -202,9 +250,9 @@ public class MainView extends JFrameView implements ModelListener {
 
     }
 
-    
     /**
      * set the position of the slider
+     *
      * @param position where you want to position your slider
      */
     public void setjSlider1(int position) {
@@ -219,7 +267,7 @@ public class MainView extends JFrameView implements ModelListener {
         System.out.println("Start video");
         mediaPlayer.getMediaPlayer().playMedia("test.avi");
         mediaPlayer.getMediaPlayer().start();
-       
+
 
 
 
