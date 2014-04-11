@@ -95,7 +95,6 @@ public class VlcListener implements MediaPlayerEventListener {
      */
     public void finished(MediaPlayer mediaPlayer) {
         
-        
         if (view.getToggleButton1state()) {
             view.startVideo();
             

@@ -89,8 +89,8 @@ public class MainController {
         model.addFileToMediaList(file);
     }
     
-    public void notifyNewPlay(int row) {
-        model.playFile(row);
+    public void notifyNewPlay(int index) {
+        model.playFile(index);
     }
     
     public void notifyReorder(int fromIndex, int toIndex) {

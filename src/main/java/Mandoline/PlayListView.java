@@ -39,7 +39,7 @@ public class PlayListView extends JPanelView {
         System.out.println("PlayListView created");
         
         
-        table = new JTable(new MyTableModel(this.getController()));
+        table = new JTable(new MyTableModel(controller));
 
         table.setDragEnabled(true);
         table.setDropMode(DropMode.INSERT_ROWS);
@@ -49,8 +49,7 @@ public class PlayListView extends JPanelView {
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clickedItem(table.getSelectedRow());
-                
+                clickOnListPerformed(evt);
             }
         });
         
@@ -222,7 +221,19 @@ public class PlayListView extends JPanelView {
         
     public void newMedia(EventNewFile event) {
         if(event.isSupported()) {
-            ((MyTableModel)table.getModel()).setList(event.data);
+            MediaPlayerFactory factory = new MediaPlayerFactory();
+            MediaPlayer mediaPlayer = factory.newHeadlessMediaPlayer();
+
+            mediaPlayer.prepareMedia(event.getFile().getAbsolutePath());
+            mediaPlayer.parseMedia();
+            MediaMeta mediaMeta = mediaPlayer.getMediaMeta();
+            //System.out.println("MediaList changed, data : " + mediaMeta);
+            Vector<Object> row = new Vector<Object>();
+            row.add(mediaMeta.getTitle());
+            row.add(event.getFile().getAbsolutePath());
+            row.add(mediaMeta.getArtist());
+            row.add(mediaMeta.getAlbum());
+            ((MyTableModel)table.getModel()).setRow(row);
         }
         else {
             System.out.println("badFileChoosen : " + event.file);
@@ -230,7 +241,10 @@ public class PlayListView extends JPanelView {
         }
     }
     
-    public void clickedItem (int index) {
+    
+    public void clickOnListPerformed(java.awt.event.MouseEvent evt) {
+        int index = table.getSelectedRow();
+        String mrl = ((MyTableModel)table.getModel()).getMrl(index);
         controller.notifyNewPlay(index);
     }
 }
