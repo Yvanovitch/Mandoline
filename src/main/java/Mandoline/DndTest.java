@@ -24,8 +24,6 @@ public class DndTest extends JFrame {
 
         JTable table = new JTable(new MyTableModel());
 
-        //JTable(Vector rowData, Vector columnNames)
-        //JTable table = new JTable(Object[][] rowData, Object[] columnNames);
         table.setDragEnabled(true);
         table.setDropMode(DropMode.INSERT_ROWS);
         table.setTransferHandler(new TableRowTransferHandler(table));

@@ -4,8 +4,16 @@
 
 package Mandoline;
 
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.io.File;
 import java.util.EventObject;
+import javax.swing.DropMode;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.medialist.MediaList;
 import uk.co.caprica.vlcj.player.MediaMeta;
@@ -17,12 +25,54 @@ import uk.co.caprica.vlcj.player.MediaPlayerFactory;
  * @author yvan.richer@gmail.com
  */
 public class PlayListView extends JPanelView {
+    
+    private JTable table;
 
     public PlayListView(MainController controller) {
         super(controller);
         initComponents();
-        
         System.out.println("PlayListView created");
+        
+        
+        table = new JTable(new MyTableModel());
+
+        table.setDragEnabled(true);
+        table.setDropMode(DropMode.INSERT_ROWS);
+        table.setTransferHandler(new TableRowTransferHandler(table));
+        table.setFillsViewportHeight(true);
+        table.setAutoCreateRowSorter(true);
+        
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setAutoscrolls(true);
+        
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(next, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(previous, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                //.addContainerGap(162, Short.MAX_VALUE)
+                .addComponent(scrollPane)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(add)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(next)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(previous)
+                .addGap(27, 27, 27))
+        );
     }
 
     /**
@@ -37,7 +87,6 @@ public class PlayListView extends JPanelView {
         errorFrame = new javax.swing.JFrame();
         fileErrorPane = new javax.swing.JOptionPane();
         explorer = new javax.swing.JFileChooser();
-        jLabel1 = new javax.swing.JLabel();
         add = new javax.swing.JButton();
         previous = new javax.swing.JButton();
         next = new javax.swing.JButton();
@@ -45,6 +94,11 @@ public class PlayListView extends JPanelView {
         errorFrame.setMinimumSize(new java.awt.Dimension(350, 150));
 
         fileErrorPane.setMessage("Le fichier choisi n\'est pas supporté par VLC");
+        fileErrorPane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fileErrorPaneMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout errorFrameLayout = new javax.swing.GroupLayout(errorFrame.getContentPane());
         errorFrame.getContentPane().setLayout(errorFrameLayout);
@@ -66,8 +120,6 @@ public class PlayListView extends JPanelView {
                     .addComponent(fileErrorPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(0, 0, 0)))
         );
-
-        jLabel1.setText("test !!!");
 
         add.setText("Ajouter");
         add.addActionListener(new java.awt.event.ActionListener() {
@@ -97,9 +149,6 @@ public class PlayListView extends JPanelView {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(next, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(previous, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
@@ -108,9 +157,7 @@ public class PlayListView extends JPanelView {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addContainerGap(162, Short.MAX_VALUE)
                 .addComponent(add)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(next)
@@ -138,13 +185,16 @@ public class PlayListView extends JPanelView {
         }
     }//GEN-LAST:event_addActionPerformed
 
+    private void fileErrorPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fileErrorPaneMouseClicked
+        errorFrame.setVisible(false);
+    }//GEN-LAST:event_fileErrorPaneMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
     private javax.swing.JFrame errorFrame;
     private javax.swing.JFileChooser explorer;
     private javax.swing.JOptionPane fileErrorPane;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton next;
     private javax.swing.JButton previous;
     // End of variables declaration//GEN-END:variables
@@ -178,14 +228,5 @@ public class PlayListView extends JPanelView {
             System.out.println("MediaList changed, data : " + mediaMeta);
         }
     }
-/*
-    public void positionChanged(float position) {
-    }
-
-    public void badFileChoosen(File file) {
-    }
-
-    public void mediaAdded(MediaList mediaList) {
-    }*/
 
 }

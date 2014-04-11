@@ -10,8 +10,12 @@ import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 import com.sun.org.apache.xerces.internal.util.DOMUtil;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.io.File;
 import java.util.EventObject;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.binding.internal.libvlc_media_t;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
@@ -26,7 +30,7 @@ import uk.co.caprica.vlcj.runtime.RuntimeUtil;
  * @author Mathieu
  */
 public class MainView extends JFrameView implements ModelListener {
-
+    JPanel playList;
     /**
      * Creates new form Player
      */
@@ -39,7 +43,18 @@ public class MainView extends JFrameView implements ModelListener {
         System.out.println("Created");
         initComponents();
         
+        playList = new PlayListView(this.getController());
+        /*jFrame.add(jButton, BorderLayout.NORTH);
+        jFrame.add(jButton2, BorderLayout.SOUTH);
+        jFrame.setLayout(new BorderLayout()); //*/
+        add(mediaPlayer,BorderLayout.CENTER);
+        this.add(playList,BorderLayout.WEST);
+        this.add(mediaPlayer);
+        
+        this.pack();
+        
         this.display();
+        this.startVideo();
     }
 
     /**
@@ -51,100 +66,13 @@ public class MainView extends JFrameView implements ModelListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        explorer = new javax.swing.JFileChooser();
-        errorFrame = new javax.swing.JFrame();
-        fileErrorPane = new javax.swing.JOptionPane();
-        playList = new PlayListView(this.getController());
-        jLabel1 = new javax.swing.JLabel();
-        add = new javax.swing.JButton();
-        previous = new javax.swing.JButton();
-        next = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jSlider1 = new javax.swing.JSlider();
         Pause = new javax.swing.JButton();
         stop = new javax.swing.JButton();
 
-        errorFrame.setMinimumSize(new java.awt.Dimension(350, 150));
-
-        fileErrorPane.setMessage("Le fichier choisi n\'est pas supporté par VLC");
-
-        javax.swing.GroupLayout errorFrameLayout = new javax.swing.GroupLayout(errorFrame.getContentPane());
-        errorFrame.getContentPane().setLayout(errorFrameLayout);
-        errorFrameLayout.setHorizontalGroup(
-            errorFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 262, Short.MAX_VALUE)
-            .addGroup(errorFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(errorFrameLayout.createSequentialGroup()
-                    .addGap(0, 0, 0)
-                    .addComponent(fileErrorPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(0, 0, 0)))
-        );
-        errorFrameLayout.setVerticalGroup(
-            errorFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 95, Short.MAX_VALUE)
-            .addGroup(errorFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(errorFrameLayout.createSequentialGroup()
-                    .addGap(0, 0, 0)
-                    .addComponent(fileErrorPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(0, 0, 0)))
-        );
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        jLabel1.setText("test !!!");
-
-        add.setText("Ajouter");
-        add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addActionPerformed(evt);
-            }
-        });
-
-        previous.setText("Précédent");
-        previous.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                previousActionPerformed(evt);
-            }
-        });
-
-        next.setText("Suivant");
-        next.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nextActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout playListLayout = new javax.swing.GroupLayout(playList);
-        playList.setLayout(playListLayout);
-        playListLayout.setHorizontalGroup(
-            playListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(playListLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(playListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(playListLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(next, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(previous, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        playListLayout.setVerticalGroup(
-            playListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(playListLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
-                .addComponent(add)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(next)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(previous)
-                .addGap(27, 27, 27))
-        );
-
-        getContentPane().add(playList, java.awt.BorderLayout.LINE_START);
 
         Pause.setText("Pause");
         Pause.addActionListener(new java.awt.event.ActionListener() {
@@ -197,48 +125,21 @@ public class MainView extends JFrameView implements ModelListener {
         controller.notifyStopped();
     }//GEN-LAST:event_stopActionPerformed
 
-    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-        explorer.setCurrentDirectory(new java.io.File("D:/Films"));
-
-        if (explorer.showOpenDialog(null) == explorer.APPROVE_OPTION) {
-            controller.notifyAdd(explorer.getSelectedFile());
-        } else {
-            System.out.println("No Selection ");
-        }
-    }//GEN-LAST:event_addActionPerformed
-
-    private void previousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousActionPerformed
-        controller.notifyPrevious();
-    }//GEN-LAST:event_previousActionPerformed
-
-    private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        controller.notifyNext();
-    }//GEN-LAST:event_nextActionPerformed
-
 
 
 
     private EmbeddedMediaPlayerComponent mediaPlayer;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Pause;
-    private javax.swing.JButton add;
-    private javax.swing.JFrame errorFrame;
-    private javax.swing.JFileChooser explorer;
-    private javax.swing.JOptionPane fileErrorPane;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSlider jSlider1;
-    private javax.swing.JButton next;
-    private javax.swing.JPanel playList;
-    private javax.swing.JButton previous;
     private javax.swing.JButton stop;
     // End of variables declaration//GEN-END:variables
 
     public void startVideo() {
-        add(mediaPlayer,BorderLayout.CENTER);
         //jInternalFrame1.add(mediaPlayerComponent,BorderLayout.CENTER);
         System.out.println("Start video");
-        mediaPlayer.getMediaPlayer().playMedia("test.avi");
+        mediaPlayer.getMediaPlayer().playMedia("D:\\le.pacte.avi");
         mediaPlayer.getMediaPlayer().start();
 
     }

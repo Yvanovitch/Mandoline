@@ -42,6 +42,9 @@
               <Connection code="&quot;Le fichier choisi n\&apos;est pas support&#xe9; par VLC&quot;" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="fileErrorPaneMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -66,10 +69,6 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
                   <Component id="add" alignment="0" max="32767" attributes="0"/>
                   <Component id="next" alignment="0" max="32767" attributes="0"/>
                   <Component id="previous" alignment="0" pref="102" max="32767" attributes="0"/>
@@ -81,9 +80,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="89" max="32767" attributes="0"/>
+              <EmptySpace pref="162" max="32767" attributes="0"/>
               <Component id="add" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="next" min="-2" max="-2" attributes="0"/>
@@ -95,11 +92,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="test !!!"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="add">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ajouter"/>
