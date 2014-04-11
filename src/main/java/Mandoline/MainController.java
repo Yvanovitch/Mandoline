@@ -88,4 +88,8 @@ public class MainController {
     public void notifyAdd(File file) {
         model.addFileToMediaList(file);
     }
+    
+    public void notifyNewPlay(String mrl) {
+        model.playFile(mrl);
+    }
 }

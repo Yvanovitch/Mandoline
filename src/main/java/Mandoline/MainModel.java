@@ -126,6 +126,12 @@ public class MainModel extends Observable {
         }
     }
     
+    public void playFile(String mrl) {
+        player.getMediaPlayer().playMedia(mrl);
+        player.getMediaPlayer().start();
+        System.out.println("Mandoline joue "+mrl);
+    }
+    
     /**
      *
      * @param listener

@@ -245,6 +245,6 @@ public class PlayListView extends JPanelView {
     public void clickOnListPerformed(java.awt.event.MouseEvent evt) {
         int index = table.getSelectedRow();
         String mrl = ((MyTableModel)table.getModel()).getMrl(index);
-        
+        controller.notifyNewPlay(mrl);
     }
 }
