@@ -7,6 +7,7 @@ import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 public class MainController {
 	public MainView mainView;
         public VlcListener listener;
+        
  
 	private MainModel model = null;
  
