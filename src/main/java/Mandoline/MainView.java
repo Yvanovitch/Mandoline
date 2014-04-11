@@ -15,6 +15,7 @@ import java.io.File;
 import java.util.EventObject;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.binding.internal.libvlc_media_t;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
@@ -26,7 +27,7 @@ import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
 /**
- *
+ * It is the view of the application
  * @author Mathieu
  */
 public class MainView extends JFrameView implements ModelListener {
@@ -35,13 +36,15 @@ public class MainView extends JFrameView implements ModelListener {
     EmbeddedMediaPlayerComponent player;
 
     /**
-     * Creates new form Player
+     * Creates new form Player 
+     * @param mainController 
+     * @param player 
      */
     public MainView(MainController mainController, EmbeddedMediaPlayerComponent player) {
         super(mainController);
         this.player = player;
         mediaPlayer = player;
-       
+        
         //player.getMediaPlayer().addMediaPlayerEventListener(new VlcListener(this));
         //mediaPlayerComponent.getMediaPlayer().start();
         System.out.println("Created");
@@ -155,35 +158,62 @@ public class MainView extends JFrameView implements ModelListener {
     private javax.swing.JButton stop;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * set the text of the button pause
+     * @param str the text you want to write in the button
+     */
     public void setPause(String str) {
         Pause.setText(str);
     }
 
+    /**
+     * get the value of the ButtonRepeat
+     * @return a boolean which indicate if the togglebutton is activated
+     */
     public boolean getToggleButton1state() {
 
         return jToggleButton1.isSelected();
     }
 
+    /**
+     *  set the text in the label of the time
+     */
     public void setjlabel() {
         Time time = new Time(mediaPlayer.getMediaPlayer().getTime());
         jLabel1.setText(time.toString());
     }
 
+    /**
+     * get the slider value
+     * @return the slider value
+     */
     public int getjSlider1() {
         System.out.println(jSlider1.getValue());
         return jSlider1.getValue();
     }
 
+    /**
+     * set the position of the current video
+     * @param f the position where you want to position your video
+     */
     public void setPosition(float f) {
 
         mediaPlayer.getMediaPlayer().setPosition(f);
 
     }
 
+    
+    /**
+     * set the position of the slider
+     * @param position where you want to position your slider
+     */
     public void setjSlider1(int position) {
         jSlider1.setValue(position);
     }
 
+    /**
+     * It's what starts the play of the video
+     */
     public void startVideo() {
         //jInternalFrame1.add(mediaPlayerComponent,BorderLayout.CENTER);
         System.out.println("Start video");
@@ -195,6 +225,10 @@ public class MainView extends JFrameView implements ModelListener {
 
     }
 
+    /**
+     *
+     * @param event
+     */
     public void refresh(EventObject event) {
         if (event instanceof EventVolume) {
         } else if (event instanceof EventPosition) {
@@ -204,6 +238,10 @@ public class MainView extends JFrameView implements ModelListener {
         }
     }
 
+    /**
+     *
+     * @param event
+     */
     public void positionChanged(EventObject event) {
         if (event instanceof EventPosition) {
             float position = ((EventPosition) event).getPosition();
@@ -211,12 +249,18 @@ public class MainView extends JFrameView implements ModelListener {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void display() {
         this.setVisible(true);
         this.startVideo();
     }
 
+    /**
+     *
+     */
     @Override
     public void close() {
         throw new UnsupportedOperationException("Not supported yet.");

@@ -20,7 +20,11 @@ public class TableRowTransferHandler extends TransferHandler {
    private final DataFlavor localObjectFlavor = new ActivationDataFlavor(Integer.class, DataFlavor.javaJVMLocalObjectMimeType, "Integer Row Index");
    private JTable           table             = null;
 
-   public TableRowTransferHandler(JTable table) {
+    /**
+     *
+     * @param table
+     */
+    public TableRowTransferHandler(JTable table) {
       this.table = table;
    }
 

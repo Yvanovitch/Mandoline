@@ -16,6 +16,7 @@ public class PlayerView extends JPanelView {
 
     /**
      * Creates new form PlayerView
+     * @param mainController 
      */
     public PlayerView(MainController mainController) {
         super(mainController);
@@ -48,15 +49,31 @@ public class PlayerView extends JPanelView {
     // End of variables declaration//GEN-END:variables
 
 
+    /**
+     *
+     * @param event
+     */
     public void refresh(EventObject event) {
     }
 
+    /**
+     *
+     * @param position
+     */
     public void positionChanged(float position) {
     }
 
+    /**
+     *
+     * @param file
+     */
     public void badFileChoosen(File file) {
     }
 
+    /**
+     *
+     * @param mediaList
+     */
     public void mediaAdded(MediaList mediaList) {
     }
 }

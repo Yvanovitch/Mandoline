@@ -1,5 +1,14 @@
 package Mandoline;
 
+/**
+ *
+ * @author STEPHAN
+ */
 public interface Reorderable {
-   public void reorder(int fromIndex, int toIndex);
+    /**
+     *
+     * @param fromIndex
+     * @param toIndex
+     */
+    public void reorder(int fromIndex, int toIndex);
 }

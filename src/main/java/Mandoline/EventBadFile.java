@@ -14,12 +14,21 @@ import java.util.EventObject;
 public class EventBadFile extends EventPlayList {
     File file;
     
+    /**
+     *
+     * @param source
+     * @param file
+     */
     public EventBadFile(Object source, File file) {
         super(source);
         
         this.file = file;
     }
     
+    /**
+     *
+     * @return
+     */
     public File getFile () {
         return file;
     }

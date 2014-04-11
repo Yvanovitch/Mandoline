@@ -1,15 +1,30 @@
 package Mandoline;
 
+/**
+ *
+ * @author STEPHAN
+ */
 public abstract class JPanelView extends javax.swing.JPanel implements ModelListener{
-	protected MainController controller = null;
+	/**
+     *
+     */
+    protected MainController controller = null;
  
-	public JPanelView(MainController controller){
+	/**
+     *
+     * @param controller
+     */
+    public JPanelView(MainController controller){
 		super();
  
 		this.controller = controller;
 	}
  
-	public final MainController getController(){
+	/**
+     *
+     * @return
+     */
+    public final MainController getController(){
 		return controller;
 	}
 }

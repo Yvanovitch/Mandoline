@@ -7,16 +7,29 @@ package Mandoline;
 
 import java.util.EventObject;
  
+/**
+ *
+ * @author STEPHAN
+ */
 public class EventVolume extends EventObject{
 	private int newVolume;
  
-	public EventVolume(Object source, int newVolume){
+	/**
+     *
+     * @param source
+     * @param newVolume
+     */
+    public EventVolume(Object source, int newVolume){
 		super(source);
  
 		this.newVolume = newVolume;
 	}
  
-	public int getNewVolume(){
+	/**
+     *
+     * @return
+     */
+    public int getNewVolume(){
 		return newVolume;
 	}
 }

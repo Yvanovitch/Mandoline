@@ -6,6 +6,10 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 
+/**
+ *
+ * @author STEPHAN
+ */
 public class MyTableModel extends AbstractTableModel implements Reorderable {
     private String[] columnNames = {"Name", "Length", "Artiste", "Album"};
     private Vector<Vector<Object>> data;
@@ -19,6 +23,9 @@ public class MyTableModel extends AbstractTableModel implements Reorderable {
         };*/
     
         
+    /**
+     *
+     */
     public MyTableModel () {
         data = new Vector<Vector<Object>>();
         
@@ -96,6 +103,13 @@ public class MyTableModel extends AbstractTableModel implements Reorderable {
 
     }
     
+    /**
+     *
+     * @param vector
+     * @param index
+     * @param value
+     * @return
+     */
     public Object mySetElementAt(Vector vector, int index, Object value) {
         while(vector.size() < index + 1) {
             vector.add("");
@@ -103,6 +117,11 @@ public class MyTableModel extends AbstractTableModel implements Reorderable {
         return vector.set(index, value);
     }
 
+    /**
+     *
+     * @param fromIndex
+     * @param toIndex
+     */
     public void reorder(int fromIndex, int toIndex) {
         data.set(fromIndex, data.set(toIndex, data.get(fromIndex)));
     }

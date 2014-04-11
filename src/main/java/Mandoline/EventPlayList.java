@@ -12,6 +12,10 @@ import java.util.EventObject;
  */
 public abstract class EventPlayList extends EventObject {
     
+    /**
+     *
+     * @param source
+     */
     public EventPlayList(Object source) {
         super(source);
     }

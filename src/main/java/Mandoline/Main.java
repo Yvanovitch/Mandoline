@@ -7,6 +7,10 @@ import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
+/**
+ *
+ * @author STEPHAN
+ */
 public class Main {
         /**
      * @param args the command line arguments

@@ -10,6 +10,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.BoxLayout;
@@ -24,19 +25,35 @@ import javax.swing.event.ChangeEvent;
  *
  * @author STEPHAN
  */
-public class ChangeListener implements MouseMotionListener {
-    private MainView view;
+public class ChangeListener implements MouseListener {
 
+    private MainView view;
     
+    /**
+     *
+     * @param view
+     */
     public ChangeListener(MainView view){
         this.view = view;
     }
-    
-    public void mouseDragged(MouseEvent e) {
+
+    public void mouseClicked(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void mousePressed(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void mouseReleased(MouseEvent e) {
         
     }
 
-    public void mouseMoved(MouseEvent e) {
-        view.setPosition(view.getjSlider1()/100);
+    public void mouseEntered(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void mouseExited(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -28,6 +28,10 @@ public class PlayListView extends JPanelView {
     
     private JTable table;
 
+    /**
+     *
+     * @param controller
+     */
     public PlayListView(MainController controller) {
         super(controller);
         initComponents();
@@ -176,7 +180,7 @@ public class PlayListView extends JPanelView {
     }//GEN-LAST:event_previousActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-        explorer.setCurrentDirectory(new java.io.File("D:/test.avi"));
+        explorer.setCurrentDirectory(new java.io.File("C:/"));
 
         if (explorer.showOpenDialog(null) == explorer.APPROVE_OPTION) {
             controller.notifyAdd(explorer.getSelectedFile());
@@ -200,6 +204,10 @@ public class PlayListView extends JPanelView {
     // End of variables declaration//GEN-END:variables
 
 
+    /**
+     *
+     * @param event
+     */
     public void refresh(EventObject event) {
         if(event instanceof EventMediaList) {
             mediaListChanged((EventMediaList)event);
@@ -208,11 +216,19 @@ public class PlayListView extends JPanelView {
         }
     }
     
+    /**
+     *
+     * @param event
+     */
     public void badFileChoosen(EventBadFile event) {
         System.out.println("badFileChoosen : "+event.file);
         errorFrame.setVisible(true);
     }
     
+    /**
+     *
+     * @param event
+     */
     public void mediaListChanged(EventMediaList event) {
         MediaList mediaList = event.getMediaList();
         

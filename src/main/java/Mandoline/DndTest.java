@@ -14,12 +14,19 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.event.MouseInputAdapter;
 
+/**
+ *
+ * @author STEPHAN
+ */
 public class DndTest extends JFrame {
 
     JTable table;
     JList<String> myList;
     DefaultListModel<String> myListModel;
 
+    /**
+     *
+     */
     public DndTest() {
 
         JTable table = new JTable(new MyTableModel());
@@ -41,6 +48,10 @@ public class DndTest extends JFrame {
         this.setVisible(true);
     }
     
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new DndTest();
     }
