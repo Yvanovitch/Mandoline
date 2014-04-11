@@ -118,7 +118,6 @@ public class VlcListener implements MediaPlayerEventListener {
     public void positionChanged(MediaPlayer mediaPlayer, float newPosition) {
         float position = view.getjSlider1();
         view.setjSlider1((int) (newPosition * 100));
-       
         view.setjlabel();
         
         
