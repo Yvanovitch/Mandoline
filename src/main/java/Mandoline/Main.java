@@ -3,6 +3,7 @@ package Mandoline;
 
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
+import java.io.File;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
@@ -50,6 +51,9 @@ public class Main {
         MainController mainController = new MainController(mainModel, mediaPlayer);
         mediaPlayer.getMediaPlayer().addMediaPlayerEventListener(mainModel.getVlcListener());
         
+        File fileTest = new File("C:\\test.avi");
+        mainController.notifyAdd(fileTest);
+        mainController.notifyNewPlay("C:\\test.avi");
         //mainController.displayViews();
         
     }
