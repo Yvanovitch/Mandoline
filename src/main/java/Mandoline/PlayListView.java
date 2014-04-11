@@ -176,7 +176,7 @@ public class PlayListView extends JPanelView {
     }//GEN-LAST:event_previousActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-        explorer.setCurrentDirectory(new java.io.File("D:/Films"));
+        explorer.setCurrentDirectory(new java.io.File("D:/test.avi"));
 
         if (explorer.showOpenDialog(null) == explorer.APPROVE_OPTION) {
             controller.notifyAdd(explorer.getSelectedFile());

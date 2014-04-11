@@ -5,15 +5,17 @@ import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 
 
 public class MainController {
-	public ModelListener mainView;
+	public MainView mainView;
+        public VlcListener listener;
  
 	private MainModel model = null;
  
 	public MainController (MainModel model, EmbeddedMediaPlayerComponent player){
 		this.model = model;
- 
+                
 		mainView = new MainView(this, player);
- 
+                listener = new VlcListener(mainView);
+                player.getMediaPlayer().addMediaPlayerEventListener(listener);
 		addListenersToModel();
 	}
  
