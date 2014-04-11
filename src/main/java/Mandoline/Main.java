@@ -46,7 +46,7 @@ public class Main {
         MainController mainController = new MainController(mainModel, mediaPlayer);
         mediaPlayer.getMediaPlayer().addMediaPlayerEventListener(mainModel.getVlcListener());
         
-        mainController.displayViews();
+        //mainController.displayViews();
         
     }
 }

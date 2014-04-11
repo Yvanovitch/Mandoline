@@ -7,10 +7,10 @@ package Mandoline;
 
 import java.util.EventObject;
  
-public class VolumeChangedEvent extends EventObject{
+public class EventVolume extends EventObject{
 	private int newVolume;
  
-	public VolumeChangedEvent(Object source, int newVolume){
+	public EventVolume(Object source, int newVolume){
 		super(source);
  
 		this.newVolume = newVolume;

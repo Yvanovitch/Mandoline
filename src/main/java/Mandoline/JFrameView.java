@@ -1,9 +1,9 @@
 package Mandoline;
 
-public abstract class AbstractView extends javax.swing.JFrame implements ViewListener{
+public abstract class JFrameView extends javax.swing.JFrame implements ModelListener{
 	protected MainController controller = null;
  
-	public AbstractView(MainController controller){
+	public JFrameView(MainController controller){
 		super();
  
 		this.controller = controller;

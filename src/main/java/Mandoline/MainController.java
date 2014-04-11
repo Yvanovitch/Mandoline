@@ -5,7 +5,7 @@ import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 
 
 public class MainController {
-	public AbstractView mainView;
+	public ModelListener mainView;
  
 	private MainModel model = null;
  
@@ -20,19 +20,16 @@ public class MainController {
 	private void addListenersToModel() {
 		model.addListener(mainView);
 	}
- 
-	public void displayViews(){
+	/*public void displayViews(){
 		mainView.display();
 	}
- 
 	public void closeViews(){
 		mainView.close();
-	}
+	}*/
  
 	public void notifyVolumeChanged(int volume){
 		model.setVolume(volume);
 	}
-        
         public void notifyPaused(){
                 model.setPause();
         }

@@ -1,6 +1,7 @@
 package Mandoline;
 
 import java.io.File;
+import java.util.EventObject;
 import java.util.Observable;
 import javax.swing.event.EventListenerList;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
@@ -44,7 +45,7 @@ public class MainModel extends Observable {
     public void setVolume(int volume) {
         this.volume = volume;
 
-        fireVolumeChanged();
+        fireEvent(new EventVolume(this, getVolume()));
     }
     
     public void setPause(){
@@ -57,7 +58,7 @@ public class MainModel extends Observable {
     
     public void setPosition(float position) {
         this.position = position;
-        firePositionChanged();
+        fireEvent(new EventPosition(this, position));
     }
     public void setStop(){
         player.getMediaPlayer().stop();
@@ -75,54 +76,28 @@ public class MainModel extends Observable {
         MediaFileFilter filter = new MediaFileFilter();
         if (filter.accept(file)){
             mediaList.addMedia(file.getPath());
-            fireMediaAdded(mediaList);
+            fireEvent(new EventMediaList(this, mediaList));
         }
         else {
             System.out.println("Fichier invalide");
-            fireBadFileChoosen(file);
+            fireEvent(new EventBadFile(this, file));
         }
         
     }
     
-    public void addListener(ViewListener listener) {
-        listeners.add(ViewListener.class, listener);
+    public void addListener(ModelListener listener) {
+        listeners.add(ModelListener.class, listener);
     }
 
-    public void removeListener(ViewListener l) {
-        listeners.remove(ViewListener.class, l);
-    }
-    
-    
-    
-    public void fireVolumeChanged() {
-        ViewListener[] listenerList = (ViewListener[]) listeners.getListeners(ViewListener.class);
-
-        for (ViewListener listener : listenerList) {
-            listener.volumeChanged(new VolumeChangedEvent(this, getVolume()));
-        }
-    }
-    
-    public void firePositionChanged() {
-        ViewListener[] listenerList = (ViewListener[]) listeners.getListeners(ViewListener.class);
-
-        for (ViewListener listener : listenerList) {
-            listener.positionChanged(getPosition());
-        }
+    public void removeListener(ModelListener l) {
+        listeners.remove(ModelListener.class, l);
     }
 
-    private void fireBadFileChoosen(File file) {
-        ViewListener[] listenerList = (ViewListener[]) listeners.getListeners(ViewListener.class);
+    public void fireEvent(EventObject event) {
+        ModelListener[] listenerList = listeners.getListeners(ModelListener.class);
 
-        for (ViewListener listener : listenerList) {
-            listener.badFileChoosen(file);
-        }
-    }
-
-    private void fireMediaAdded(MediaList mediaList) {
-        ViewListener[] listenerList = (ViewListener[]) listeners.getListeners(ViewListener.class);
-
-        for (ViewListener listener : listenerList) {
-            listener.mediaAdded(mediaList);
+        for (ModelListener listener : listenerList) {
+            listener.refresh(event);
         }
     }
     
