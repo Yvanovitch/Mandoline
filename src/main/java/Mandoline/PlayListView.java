@@ -157,7 +157,7 @@ public class PlayListView extends JPanelView {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(162, Short.MAX_VALUE)
+                .addContainerGap(279, Short.MAX_VALUE)
                 .addComponent(add)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(next)
@@ -209,7 +209,6 @@ public class PlayListView extends JPanelView {
     }
     
     public void badFileChoosen(EventBadFile event) {
-        
         System.out.println("badFileChoosen : "+event.file);
         errorFrame.setVisible(true);
     }
@@ -217,15 +216,21 @@ public class PlayListView extends JPanelView {
     public void mediaListChanged(EventMediaList event) {
         MediaList mediaList = event.getMediaList();
         
-        Object [][] mediaTable = null;
+        String test = "test";
+        
         MediaPlayerFactory factory = new MediaPlayerFactory();
         MediaPlayer mediaPlayer = factory.newHeadlessMediaPlayer();
         for (int i=0 ; i < mediaList.size() ; i++){
+            
             //System.out.println("Media : " + mediaList.items().get(i).name() + mediaList.items().get(i).mrl());
             mediaPlayer.prepareMedia(mediaList.items().get(i).mrl());
             mediaPlayer.parseMedia();
             MediaMeta mediaMeta = mediaPlayer.getMediaMeta();
-            System.out.println("MediaList changed, data : " + mediaMeta);
+            //System.out.println("MediaList changed, data : " + mediaMeta);
+            table.setValueAt(mediaMeta.getTitle(), i, 0);
+            /*table.setValueAt(mediaMeta.getLength(), i, 1);
+            table.setValueAt(mediaMeta.getArtist(), i, 2);
+            table.setValueAt(mediaMeta.getAlbum(), i, 3);*/
         }
     }
 
