@@ -22,6 +22,7 @@ import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.medialist.MediaList;
 import uk.co.caprica.vlcj.player.MediaMeta;
 import uk.co.caprica.vlcj.player.MediaPlayer;
+import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
@@ -38,6 +39,8 @@ public class MainView extends JFrameView implements ModelListener {
         super(mainController);
         
         mediaPlayer = player;
+        
+        //player.getMediaPlayer().addMediaPlayerEventListener(new VlcListener(this));
 
         //mediaPlayerComponent.getMediaPlayer().start();
         System.out.println("Created");
@@ -50,6 +53,7 @@ public class MainView extends JFrameView implements ModelListener {
         add(mediaPlayer,BorderLayout.CENTER);
         this.add(playList,BorderLayout.WEST);
         this.add(mediaPlayer);
+        
         
         this.pack();
         
@@ -70,6 +74,7 @@ public class MainView extends JFrameView implements ModelListener {
         jSlider1 = new javax.swing.JSlider();
         Pause = new javax.swing.JButton();
         stop = new javax.swing.JButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -88,16 +93,20 @@ public class MainView extends JFrameView implements ModelListener {
             }
         });
 
+        jToggleButton1.setText("Repeat");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Pause, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Pause)
+                .addGap(18, 18, 18)
                 .addComponent(stop, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -106,9 +115,11 @@ public class MainView extends JFrameView implements ModelListener {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(stop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                    .addComponent(Pause, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Pause, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(stop)
+                        .addComponent(jToggleButton1)))
                 .addContainerGap())
         );
 
@@ -133,13 +144,33 @@ public class MainView extends JFrameView implements ModelListener {
     private javax.swing.JButton Pause;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSlider jSlider1;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JButton stop;
     // End of variables declaration//GEN-END:variables
 
+    
+    
+    public void setPause(String str){
+        Pause.setText(str);
+    }
+    public boolean getToggleButton1state(){
+
+        return jToggleButton1.isSelected();
+        
+    }
+            
+    public int getjSlider1(){
+        return jSlider1.getValue();
+    }
+    
+    public void setjSlider1(int position){
+        jSlider1.setValue(position);
+    }
+    
     public void startVideo() {
         //jInternalFrame1.add(mediaPlayerComponent,BorderLayout.CENTER);
         System.out.println("Start video");
-        mediaPlayer.getMediaPlayer().playMedia("D:\\le.pacte.avi");
+        mediaPlayer.getMediaPlayer().playMedia("test.avi");
         mediaPlayer.getMediaPlayer().start();
 
     }

@@ -6,10 +6,10 @@ import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
 
 
 public class VlcListener implements MediaPlayerEventListener {
-    MainModel mainModel;
+    MainView view;
     
-    public VlcListener (MainModel mainModel) {
-        this.mainModel = mainModel;
+    public VlcListener (MainView view) {
+        this.view = view;
     }
 
     public void mediaChanged(MediaPlayer mediaPlayer, libvlc_media_t media, String mrl) {
@@ -25,11 +25,11 @@ public class VlcListener implements MediaPlayerEventListener {
     }
 
     public void playing(MediaPlayer mediaPlayer) {
-        //TODO
+        view.setPause("pause");
     }
 
     public void paused(MediaPlayer mediaPlayer) {
-        //TODO
+        view.setPause("play");
     }
 
     public void stopped(MediaPlayer mediaPlayer) {
@@ -45,7 +45,11 @@ public class VlcListener implements MediaPlayerEventListener {
     }
 
     public void finished(MediaPlayer mediaPlayer) {
-        //TODO
+        
+        if (view.getToggleButton1state()){
+        view.startVideo();
+        
+    }
     }
 
     public void timeChanged(MediaPlayer mediaPlayer, long newTime) {
@@ -53,7 +57,10 @@ public class VlcListener implements MediaPlayerEventListener {
     }
 
     public void positionChanged(MediaPlayer mediaPlayer, float newPosition) {
-        mainModel.setPosition(newPosition);
+        
+        view.setjSlider1((int) (newPosition*100));
+        
+        
     }
 
     public void seekableChanged(MediaPlayer mediaPlayer, int newSeekable) {

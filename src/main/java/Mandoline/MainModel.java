@@ -27,7 +27,7 @@ public class MainModel extends Observable {
 
     public MainModel(EmbeddedMediaPlayerComponent player) {
         volume = 100;
-        vlcListener = new VlcListener(this);
+        //vlcListener = new VlcListener(this);
         listeners = new EventListenerList();
         this.player = player;
         mediaPlayerFactory = new MediaPlayerFactory();
